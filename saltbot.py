@@ -23,19 +23,19 @@ champions_version = versions['n']['champion']
 current_champ_list = lol_watcher.data_dragon.champions(champions_version)
 champs = list(current_champ_list["data"].keys())
 rnd_champ = random.choice(champs)
+rnd_lane = random.choice(["top", "jung", "mid", "adc", "sup", "team"])
 
 # Initialize the events and msgs
 ff_event = [
     f"OMFG OF COURSE THEY HAVE A {rnd_champ.upper()}... WHY WOULDN'T THEY HAVE A {rnd_champ.upper()}...",
-    # "My dino hotpockies are done - brb!\n\nA summoner has disconnected.",
-    # "I would easily be platnum if it wasn't for my team.",
-    # "ADC GAP. GG.",
+    "My dino hotpockies are done - brb!\n\nA summoner has disconnected.",
+    "I would easily be platnum if it wasn't for my team.",
+    f"{rnd_lane.upper()} GAP. GG.",
 ]
 events = [ff_event]
 num_events = len(events)
 
 # Initialize the terminate messages
-rnd_lane = random.choice(["top", "jung", "mid", "adc", "sup", "team"])
 terminate_msgs = [
     f"{rnd_lane} diff... The enemy {rnd_champ} is {random.randint(10, 50)}\\0\\{random.randint(10, 50)}."
 ]
@@ -139,7 +139,7 @@ async def on_ready():
     stop = (now + td).strftime("%H:%M")
 
     # Append the message with the stop time and instructions
-    msg = "\n\n" + msg + "\n\n"
+    msg = "\n\n" + msg + "\n\n" + "@here"
     msg += f"Type /ff within the next {td.seconds//3600} hour ({stop}) to end this missery.\n\n"
     msg += f"One point will be awarded if more than {req_contribs} people agree to surrender.\n\n"
     msg += "Type /pts to see your team's current score.\n\n"
